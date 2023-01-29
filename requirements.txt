@@ -1,0 +1,11 @@
+algoliasearch-django
+django
+djangorestframework
+djangorestframework-simplejwt
+pyyaml
+requests
+django-cors-headers
+pillow
+autopep8
+django-rest-auth
+django-allauth
