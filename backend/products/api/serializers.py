@@ -25,30 +25,6 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         fields = '__all__'
 
-    def create(self, validated_data):
-        instance = Product.objects.create(**validated_data)
-        categories_data = validated_data.pop('category')
-        actors_data = validated_data.pop('actor')
-
-        category_list = []
-        actor_list = []
-
-        for category_data in categories_data:
-
-            category_qs = Category.objects.filter(
-                name__iexact=category_data['name'])
-
-            for category in category_qs.iterator():
-                instance.add(category)
-
-        for actor_data in actors_data:
-
-            actor_qs = Actor.objects.filter(name__iexact=actor_data['name'])
-            for actor in actor_qs.iterator():
-                instance.add(actor)
-
-        return instance
-
     def update(self, instance, validated_data):
         categories_data = validated_data.pop('category')
         actors_data = validated_data.pop('actor')
@@ -77,3 +53,26 @@ class ProductSerializer(serializers.ModelSerializer):
             instance.actor.add(actor)
 
         return instance
+
+
+class ProductCreateSerializer(serializers.ModelSerializer):
+    category = CategorySerializer(many=True, read_only=True)
+    actor = ActorSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Product
+        fields = '__all__'
+
+
+class CategorySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Category
+        fields = '__all__'
+
+
+class ActorSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Actor
+        fields = '__all__'
