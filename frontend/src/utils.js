@@ -1,5 +1,5 @@
 import store from "./stores";
-import { productsFetch } from "./stores/product";
+import { productsFetch, createProduct } from "./stores/product";
 import { generatePath } from "react-router";
 import routes from "./Routes";
 
@@ -20,4 +20,8 @@ export const url = (path, params = {}) => {
 
 export const getProducts = () => {
   store.dispatch(productsFetch());
+};
+
+export const productCreate = (product) => {
+  store.dispatch(createProduct(product));
 };

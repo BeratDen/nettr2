@@ -1,18 +1,23 @@
 import { getProducts } from "../utils";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Poster from "../components/Poster";
 import News from "../components/News";
+import { AddProduct } from "./product/AddProduct";
 
 export default function Home() {
   const { products, status } = useSelector((state) => state.product);
+
+  console.log(products);
 
   useEffect(() => {
     console.log("component did mount ?? ");
     getProducts();
   }, []);
+
   return (
-    <div>
+    <div className="bg-black text-white">
+      <AddProduct></AddProduct>
       <section className="py-24 bg-black">
         {/* <!--Movies Content--> */}
         <div className="container flex flex-col lg:flex-row lg:space-x-16 space-y-8 lg:space-y-0">
@@ -47,41 +52,6 @@ export default function Home() {
           <News></News>
         </div>
       </section>
-      {/* <div
-        style={{ display: "grid", justifyContent: "center", marginTop: "10px" }}
-      >
-        {products.map((product) => (
-          <div key={product.id} style={{ marginBottom: "5px", width: "500px" }}>
-            <div
-              style={{
-                border: "3px solid black",
-                width: "50%",
-              }}
-            >
-              <div>{product.name}</div>
-              <div>{product.descriptions}</div>
-              <hr />
-              <div style={{ marginBottom: "5px" }}>
-                <div>Categoriler</div>
-                {product.category.map((category) => (
-                  <div key={category.id}>
-                    <div>{category.name}</div>
-                  </div>
-                ))}
-              </div>
-              <hr />
-              <div style={{ marginBottom: "5px" }}>
-                <div>Aktörler</div>
-                {product.actor.map((actor) => (
-                  <div key={actor.id}>
-                    <div>{actor.name}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div> */}
     </div>
   );
 }

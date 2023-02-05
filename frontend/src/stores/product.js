@@ -15,7 +15,30 @@ const product = createSlice({
   name: "products",
   initialState,
   reducers: {
-    //TODO: create delete update dispatchers
+    createProduct: (state, action) => {
+      // async () => {}
+      const endPoint = `${process.env.REACT_APP_API_URL}product/create/`;
+      const options = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: action.payload.name,
+          descriptions: action.payload.description,
+        }),
+      };
+
+      fetch(endPoint, options)
+        .then((respone) => respone.json())
+        .then((x) => {
+          //refresh token if false clear local and raise alert
+          console.log(x);
+        });
+
+      return {
+        ...state,
+        products: [...state.products, action.payload],
+      };
+    },
   },
   extraReducers: {
     [productsFetch.pending]: (state, action) => {
@@ -31,5 +54,5 @@ const product = createSlice({
   },
 });
 
-export const {} = product.actions;
+export const { createProduct } = product.actions;
 export default product.reducer;
