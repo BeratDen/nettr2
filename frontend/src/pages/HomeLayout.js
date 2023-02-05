@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { url } from "../utils";
+import { createModal } from "../utils";
 
 export default function HomeLayout() {
   return (
@@ -92,10 +93,20 @@ export default function HomeLayout() {
               </form>
               {/* <!--Signup Area--> */}
               <div className="flex items-center space-x-4 lg:space-x-8 lg:text-lg">
-                <a href="#">Login</a>
+                <a
+                  href="#"
+                  onClick={() => {
+                    createModal("login");
+                  }}
+                >
+                  Login
+                </a>
                 <a
                   href="#"
                   className="bg-gega-red px-3 py-1 hover:bg-rose-600 hover:text-gega-grey cursor-pointer transition duration-500 whitespace-nowrap"
+                  onClick={() => {
+                    createModal("register");
+                  }}
                 >
                   Sign Up
                 </a>

@@ -22,7 +22,7 @@ export function AddProduct() {
         onChange={(e) => setValue({ ...values, name: e.target.value })}
         inputProps={{ type: "text", placeholder: "Jhon Doe" }}
       ></TextField>
-      <br />
+
       <TextField
         label="Description"
         value={values.description}
